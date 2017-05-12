@@ -6,11 +6,11 @@ VISIBLE_SIZE = cc.Director:getInstance():getVisibleSize()
 WIN_SIZE = cc.Director:getInstance():getWinSize()
 
 
--- ×Óµ¯Àà±ğ
+-- å­å¼¹ç±»åˆ«
 PLANE_BULLET_TYPE = 0
 ENEMY_BULLET_TYPE = 1
 
--- Åö×²ÑÚÂëMask
+-- ç¢°æ’æ©ç Mask
 PLANE_CATEGORY_MASK     = 0x01
 PLANE_COLLISION_MASK    = 0x00
 PLANE_CONTACTTEST_MASK  = 0x0c
