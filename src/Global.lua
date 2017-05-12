@@ -2,7 +2,9 @@
 --Date 5/12/2017
 --此文件由[BabeLua]插件自动生成
 
-Global = class("Global", "")
+require("EnemyInfo")
+
+Global = class("Global")
 Global.audioState = true
 Global.life = 3
 Global.score = 0

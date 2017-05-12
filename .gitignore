@@ -14,6 +14,10 @@ simulator/
 .project
 .cocos-project.json
 
+# lua project files
+luasrc.config
+luasrc.luaproj
+
 # Ignore my files
 cocosstudio/
 *.cfg
@@ -37,3 +41,5 @@ libvorbisfile.dll
 lua51.dll
 sqlite3.dll
 zlib1.dll
+libcrypto-1_1.dll
+libssl-1_1.dll

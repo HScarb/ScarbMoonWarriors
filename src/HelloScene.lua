@@ -17,6 +17,7 @@ function HelloScene:createLayer()
 	local layer = cc.Layer:create()
 
 	local function toLoadingScene()
+        -- local scene = require("LoadingScene")
 		local loadingScene = require("LoadingScene"):create()
 		local tf = cc.TransitionFade:create(0.1, loadingScene)
 		cc.Director:getInstance():replaceScene(loadingScene)
