@@ -82,7 +82,7 @@ function Fighter:shoot()
     -- 左边子弹
     local bullet_l = Bullet:create(self.bulletSpeed, "W1.png", 1, PLANE_BULLET_TYPE)
     if nil ~= bullet_l then
-        table.insert(player_bullet, bullet_l)
+        table.insert(play_bullet, bullet_l)
         self:getParent():addChild(bullet_l, 2, 901)
         bullet_l:setPosition(cc.p(pos.x - 13, pos.y + 5 + size.height * 0.3))
     end
@@ -90,7 +90,7 @@ function Fighter:shoot()
     -- 右边子弹
     local bullet_r = Bullet:create(self.bulletSpeed, "W1.png", 1, PLANE_BULLET_TYPE)
     if nil ~= bullet_r then
-        table.insert(player_bullet, bullet_r)
+        table.insert(play_bullet, bullet_r)
         self:getParent():addChild(bullet_r, 2, 901)
         bullet_r:setPosition(cc.p(pos.x + 13, pos.y + 5 + size.height * 0.3))
     end

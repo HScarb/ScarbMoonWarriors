@@ -26,7 +26,7 @@ function Bullet:ctor(speed, weapon, attackMode, type)
 
     -- 子弹射出
     local function shoot(dt)
-        self:shootBullet(dt)
+        ----self:shootBullet(dt)
     end
 
     self:scheduleUpdateWithPriorityLua(shoot, 0)

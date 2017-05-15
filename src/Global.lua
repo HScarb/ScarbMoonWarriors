@@ -12,7 +12,7 @@ Global.highScore = 0
 Global.enemies = {}
 Global.enemyTypes = {}
 
-player_bullet = {}    -- 玩家子弹
+play_bullet = {}    -- 玩家子弹
 enemy_bullet = {}   -- 敌人子弹
 enemy_items = {}    -- 敌人集合
 
