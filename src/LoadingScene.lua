@@ -1,5 +1,7 @@
-
+Ôªø
 require("Helper")
+require("Global")
+require("Effect")
 
 LoadingScene = class("LoadingScene", function()
 	return cc.Scene:create()
@@ -43,7 +45,7 @@ function LoadingScene:addBg(layer)
     bg:setPosition(cc.p(WIN_SIZE.width / 2, WIN_SIZE.height / 2))
     layer:addChild(bg, -1, 1)
 
-    -- ÃÌº”logo tag = 2
+    -- Ê∑ªÂä†logo tag = 2
     local logo = cc.Sprite:create("logo.png")
     logo:setPosition(cc.p(WIN_SIZE.width/2, WIN_SIZE.height - 130))
     layer:addChild(logo, 10, 2)
@@ -61,58 +63,64 @@ function LoadingScene:addBtn(layer)
             self:exit()
         end
     end
-    -- ÃÌº”∞¥≈•
-    -- ”Œœ∑ø™ º
+    -- Ê∑ªÂä†ÊåâÈíÆ
+    -- Ê∏∏ÊàèÂºÄÂßã
     local newGameNormal = cc.Sprite:create("menu.png", cc.rect(0, 0, 126, 33))
     local newGameSelected = cc.Sprite:create("menu.png", cc.rect(0, 33, 126, 33))
     local newGameDisabled = cc.Sprite:create("menu.png", cc.rect(0, 33 * 2, 126, 33))
     
-    -- ”Œœ∑…Ë÷√
+    -- Ê∏∏ÊàèËÆæÁΩÆ
     local gameSettingNormal = cc.Sprite:create("menu.png", cc.rect(126, 0, 126, 33))
     local gameSettingNSelected = cc.Sprite:create("menu.png", cc.rect(126, 33, 126, 33))
     local gameSettingDesabled = cc.Sprite:create("menu.png", cc.rect(126, 33 * 2, 126, 33))
     
-    -- ”Œœ∑πÿ”⁄
+    -- Ê∏∏ÊàèÂÖ≥‰∫é
     local aboutNormal = cc.Sprite:create("menu.png", cc.rect(252, 0, 126, 33))
     local aboutSelected = cc.Sprite:create("menu.png", cc.rect(252, 33, 126, 33))
     local aboutDesabled = cc.Sprite:create("menu.png", cc.rect(252, 33 * 2, 126, 33))
     
-    -- ”Œœ∑πÿ”⁄
+    -- Ê∏∏ÊàèÂÖ≥‰∫é
     local closeNormal = cc.Sprite:create("menu.png", cc.rect(505, 1, 126, 31))
     local closeSelected = cc.Sprite:create("menu.png", cc.rect(505, 34, 126, 31))
     local closeDesabled = cc.Sprite:create("menu.png", cc.rect(505, 34 * 2, 126, 31))
 
-    -- °∞”Œœ∑°±tag = 101
+    -- ‚ÄúÊ∏∏Êàè‚Äùtag = 101
     local newGame = cc.MenuItemSprite:create(newGameNormal, newGameSelected, newGameDisabled)
     newGame:setTag(101)
-    newGame:registerScriptTapHandler(callBackButton)
+    newGame:registerScriptTapHandler(buttonCallback)
     
-    -- °∞…Ë÷√°±tag = 102
+    -- ‚ÄúËÆæÁΩÆ‚Äùtag = 102
     local gameSetting = cc.MenuItemSprite:create(gameSettingNormal, gameSettingNSelected, gameSettingDesabled)
     gameSetting:setTag(102)
-    gameSetting:registerScriptTapHandler(callBackButton)
+    gameSetting:registerScriptTapHandler(buttonCallback)
     
-    -- °∞πÿ”⁄°±tag = 103
+    -- ‚ÄúÂÖ≥‰∫é‚Äùtag = 103
     local aboutBtn = cc.MenuItemSprite:create(aboutNormal, aboutSelected, aboutDesabled)
     aboutBtn:setTag(103)
-    aboutBtn:registerScriptTapHandler(callBackButton)
+    aboutBtn:registerScriptTapHandler(buttonCallback)
     
-    -- °∞ÕÀ≥ˆ°±tag = 104
+    -- ‚ÄúÈÄÄÂá∫‚Äùtag = 104
     local close = cc.MenuItemSprite:create(closeNormal, closeSelected, closeDesabled)
     close:setTag(104)
-    close:registerScriptTapHandler(callBackButton)
+    close:registerScriptTapHandler(buttonCallback)
+
+    -- ÂàõÂª∫ËèúÂçï
+    local pmenu = cc.Menu:create(newGame, gameSetting, aboutBtn, close)
+    pmenu:setPosition(cc.p(WIN_SIZE.width / 2, WIN_SIZE.height / 2 - 80))
+    layer:addChild(pmenu, 1, 3)
+    pmenu:alignItemsVerticallyWithPadding(20)
     
 end
 
-function LoadingScene:addShip()
+function LoadingScene:addShip(layer)
     local ship = cc.Sprite:create("ship01.png", cc.rect(0, 45, 60, 38))
     ship:setPosition(cc.p(0, WIN_SIZE.height + 100))
-    self:addChild(ship, 0, 10)
+    layer:addChild(ship, 0, 10)
 
     local function updateShip()
         if ship:getPositionY() > WIN_SIZE.height then
             ship:stopAllActions()
-            ship:setPosition(math.random() * WIN_SIZE * 2, 0)
+            ship:setPosition(math.random() * WIN_SIZE.width * 2, 0)
     	    local moveto = cc.MoveTo:create(
     	        math.ceil(4.0*math.random() + 1.0),
     	        cc.p(math.random() * WIN_SIZE.width*2.0, WIN_SIZE.height + 100))
@@ -127,5 +135,29 @@ function LoadingScene:newGame()
         self:turnToGame()
     end
     local callback = cc.CallFunc:create(toGameScene)
-    -- ...
+    Effect:getInstance():flareEffect(self, callback)
 end
+
+function LoadingScene:turnToGame()
+    local gameScene = require("GameScene"):create()
+    cc.Director:getInstance():replaceScene(gameScene)
+end
+
+function LoadingScene:turnToAboutScene()
+    local aboutScene = require("AboutScene"):create()
+    local trans = cc.TransitionPageTurn:create(0.5, aboutScene, false)
+    cc.Director:getInstance():replaceScene(trans)
+end
+
+function LoadingScene:turnToOptionScene()
+    local optionScene = require("OptionScene"):create()
+    local trans = cc.TransitionPageTurn:create(0.5, optionScene, false)
+    cc.Director:getInstance():replaceScene(trans)
+end
+
+-- ÈÄÄÂá∫Á®ãÂ∫è
+function LoadingScene:exit()
+    cc.Director:getInstance():endToLua()
+end
+
+return LoadingScene

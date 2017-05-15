@@ -17,6 +17,7 @@ function HelloScene:createLayer()
 	local layer = cc.Layer:create()
 
 	local function toLoadingScene()
+        -- local scene = require("LoadingScene")
 		local loadingScene = require("LoadingScene"):create()
 		local tf = cc.TransitionFade:create(0.1, loadingScene)
 		cc.Director:getInstance():replaceScene(loadingScene)
@@ -32,6 +33,11 @@ function HelloScene:createLayer()
 	local changeScene = cc.CallFunc:create(toLoadingScene, {x = 1, y = 1})
 	local seq = cc.Sequence:create(fadein, fadeout, changeScene)
 	sp:runAction(seq)
+
+    -- addSpriteFramesWithFile -> addSpriteFrames
+    cc.SpriteFrameCache:getInstance():addSpriteFrames("bullet.plist")
+    cc.SpriteFrameCache:getInstance():addSpriteFrames("Enemy.plist")
+    cc.SpriteFrameCache:getInstance():addSpriteFrames("explosion.plist")
 
 	return layer
 end

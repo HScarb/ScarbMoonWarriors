@@ -13,6 +13,12 @@ local function main()
     collectgarbage("setpause", 100)
     collectgarbage("setstepmul", 5000)
 
+    local sharedFileUtils = cc.FileUtils:getInstance()
+    sharedFileUtils:addSearchPath("src")
+    sharedFileUtils:addSearchPath("res")
+    sharedFileUtils:addSearchPath("res/Font")
+    sharedFileUtils:addSearchPath("res/Music")
+
     local director = cc.Director:getInstance()
 
     cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(320, 480, cc.ResolutionPolicy.FIXED_WIDTH)

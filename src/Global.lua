@@ -2,7 +2,9 @@
 --Date 5/12/2017
 --此文件由[BabeLua]插件自动生成
 
-Global = class("Global", "")
+require("EnemyInfo")
+
+Global = class("Global")
 Global.audioState = true
 Global.life = 3
 Global.score = 0
@@ -10,7 +12,7 @@ Global.highScore = 0
 Global.enemies = {}
 Global.enemyTypes = {}
 
-play_bullet = {}    -- 玩家子弹
+player_bullet = {}    -- 玩家子弹
 enemy_bullet = {}   -- 敌人子弹
 enemy_items = {}    -- 敌人集合
 
@@ -141,7 +143,7 @@ function Global:getHighScore()
 end
 
 
-function Global:getEnemise()
+function Global:getEnemies()
     return self.enemies
 end
 function Global:getEnemyType()
