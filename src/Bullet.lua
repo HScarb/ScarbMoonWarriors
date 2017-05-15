@@ -22,7 +22,7 @@ function Bullet:ctor(speed, weapon, attackMode, type)
     self:setSpriteFrame(frame)
 
     -- 混合模式
-    self:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    self:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
 
     -- 子弹射出
     local function shoot(dt)

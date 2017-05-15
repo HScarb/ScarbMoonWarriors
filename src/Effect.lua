@@ -40,7 +40,7 @@ function Effect:flareEffect(parent, callback)
     local flare = cc.Sprite:create("flare.jpg")
 
     -- 设置混合模式
-    flare:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    flare:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
 
     -- 添加到父节点
     parent:addChild(flare, 10)
@@ -109,9 +109,9 @@ function Effect:spark(parent, pos, power, duration)
     parent:addChild(sp3, 33)
 
     -- 混合模式
-    sp1:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
-    sp2:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
-    sp3:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    sp1:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
+    sp2:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
+    sp3:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
 
     -- 闪光动画: 放大 + 消失
     sp1:setScale(0.5)
@@ -145,7 +145,7 @@ function Effect:hit(parent, pos)
     parent:addChild(sp, 41)
 
     -- 混合模式
-    sp:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    sp:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
 
     -- 击中动画: 放大+消失
     sp:setRotation(360 * math.random())

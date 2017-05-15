@@ -47,7 +47,7 @@ function Fighter:ctor()
     ghostShip:runAction(cc.ScaleTo:create(0.5, 1))
 
     -- 混合模式
-    ghostShip:setBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    ghostShip:setBlendFunc(cc.blendFunc(gl.SRC_ALPHA, gl.ONE))
 
     local function setCanBeAttack(node, tab)
         self.canBeAttack = true
