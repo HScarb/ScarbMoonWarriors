@@ -29,7 +29,7 @@ function Enemy:ctor(enemyType)
     local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(self.textureName)
     self:setSpriteFrame(frame)
 
-    self.size = self.getContentSize()
+    self.size = self:getContentSize()
 
     -- 射击子弹
     local function shoot()
@@ -38,13 +38,16 @@ function Enemy:ctor(enemyType)
 
     schedule(self, shoot, self.delayTime)
 
-    self:getPhysicsBody(cc.PhysicsBody:createBox(self:getContentSize()))
+    self:setPhysicsBody(cc.PhysicsBody:createBox(self:getContentSize()))
     self:getPhysicsBody():setCategoryBitmask(ENEMY_CATEGORY_MASK)
     self:getPhysicsBody():setCollisionBitmask(ENEMY_COLLISION_MASK)
     self:getPhysicsBody():setContactTestBitmask(ENEMY_CONTACTTEST_MASK)
 end
 
 function Enemy:shoot()
+    if nil == self then
+        return
+    end
     if nil == enemy_bullet then
         return
     end

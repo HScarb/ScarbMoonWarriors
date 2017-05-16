@@ -46,7 +46,7 @@ function EnemyManager:addEnemy(type)
 
     -- 设置位置
     local pos = cc.p(80 + 160 * math.random(), WIN_SIZE.height)
-    enemy.setPosition(pos)
+    enemy:setPosition(pos)
 
     -- 敌人移动轨迹
     local offset = nil

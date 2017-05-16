@@ -110,29 +110,30 @@ end
 -- 触摸事件
 function GameLayer:addTouch()
     -- 触摸开始
-    local function onTouchBegan(touch, event)
+    local function touchBegan(touch, event)
+        print("touch began")
         return true
     end
 
-    local function onTouchMoved(touch, event)
+    local function touchMoved(touch, event)
         if self.gameState == self.GAMESTATE_PLAYING then
             if nil ~= self.ship then
                 local deltaPos = touch:getDelta()
-                local currentPos = self.ship:getPosition()
+                local currentPos = cc.p(self.ship:getPosition())
+                currentPos = cc.pAdd(currentPos, deltaPos)
+                currentPos = cc.pGetClampPoint(currentPos, cc.p(0, 0), cc.p(WIN_SIZE.width, WIN_SIZE.height))
+                self.ship:setPosition(currentPos)
             end
         end
     end
 
-    local function onTouchEnded(touch, event)
-        
-    end
-
     -- 注册触摸
-    local dispatcher = self:getEventDispatcher()
     local listener = cc.EventListenerTouchOneByOne:create()
-    listener:registerScriptHandler(onTouchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
-    listener:registerScriptHandler(onTouchMoved, cc.Handler.EVENT_TOUCH_MOVED)
-    listener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
+    listener:setSwallowTouches(true)
+    listener:registerScriptHandler(touchBegan, cc.Handler.EVENT_TOUCH_BEGAN)
+    listener:registerScriptHandler(touchMoved, cc.Handler.EVENT_TOUCH_MOVED)
+
+    local dispatcher = self:getEventDispatcher()
     dispatcher:addEventListenerWithSceneGraphPriority(listener, self)
 end
 

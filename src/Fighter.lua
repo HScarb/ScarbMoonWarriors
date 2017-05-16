@@ -92,6 +92,7 @@ function Fighter:shoot()
     if nil ~= bullet_r then
         table.insert(play_bullet, bullet_r)
         self:getParent():addChild(bullet_r, 2, 901)
+		
         bullet_r:setPosition(cc.p(pos.x + 13, pos.y + 5 + size.height * 0.3))
     end
 end

@@ -14,8 +14,6 @@ function Bullet:ctor(speed, weapon, attackMode, type)
     self.vy = -speed
     self.attackmode = attackMode
 
-    print("SETSPRITEFRAME")
-    print(weapon)
     -- 设置子弹图片
     -- 通过精灵帧设置
     local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(weapon)
@@ -26,7 +24,7 @@ function Bullet:ctor(speed, weapon, attackMode, type)
 
     -- 子弹射出
     local function shoot(dt)
-        ----self:shootBullet(dt)
+        self:shoot(dt)
     end
 
     self:scheduleUpdateWithPriorityLua(shoot, 0)
@@ -48,7 +46,7 @@ function Bullet:create(speed, weapon, attackMode, type)
     return bullet
 end
 
-function Bullet:shootBullet(dt)
+function Bullet:shoot(dt)
     if self.HP <= 0 then
         self.active = false
     end
@@ -71,13 +69,13 @@ function Bullet:destroy()
         return
     end
 
-    -- 集中飞机特效
+    -- 击中飞机特效
     Effect:getInstance():hit(self:getParent(), cc.p(self:getPosition()))
 
     -- 移除
     for i, v in pairs(play_bullet) do
         if v == self then
-            table.remove(enemy_bullet, i)
+            table.remove(play_bullet, i)
         end
     end
     for i, v in pairs(enemy_bullet) do
@@ -85,7 +83,8 @@ function Bullet:destroy()
             table.remove(enemy_bullet, i)
         end
     end
-    self:removeFromParent()
+	self:setVisible(false)
+	--self:removeFromParent()
 end
 
 -- 受伤

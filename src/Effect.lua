@@ -19,7 +19,7 @@ end
 function Effect:init()
     local arr = {}
     for i = 1, 34 do
-        local str =string.format("explosion_%02d.png", i)
+        local str = string.format("explosion_%02d.png", i)
         local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(str)
         table.insert(arr, frame)
     end
@@ -93,7 +93,7 @@ function Effect:explode(parent, pos, power)
     local animation = cc.AnimationCache:getInstance():getAnimation("Explosion")
     local func = cc.CallFunc:create(killEffect)
 
-    explosion:runAction(cc.Sequence:create(cc.Animation:create(animation), func))
+    explosion:runAction(cc.Sequence:create(cc.Animate:create(animation), func))
 end
 
 -- 敌机爆炸闪光动画
@@ -139,7 +139,6 @@ end
 
 -- 子弹击中飞机
 function Effect:hit(parent, pos)
-    -- ...
     local sp = cc.Sprite:create("hit.jpg")
     sp:setPosition(pos)
     parent:addChild(sp, 41)
