@@ -6,6 +6,12 @@ Bullet = class("Bullet", function()
     return cc.Sprite:create()
 end)
 
+
+function Bullet:create(speed, weapon, attackMode, type)
+    local bullet = Bullet.new(speed, weapon, attackMode, type)
+    return bullet
+end
+
 function Bullet:ctor(speed, weapon, attackMode, type)
     self.active = true
     self.HP = 1
@@ -40,12 +46,7 @@ function Bullet:ctor(speed, weapon, attackMode, type)
         self:getPhysicsBody():setContactTestBitmask(ENEMY_BULLET_CONTACTTEST_MASK)        
     end
 end
-
-function Bullet:create(speed, weapon, attackMode, type)
-    local bullet = Bullet.new(speed, weapon, attackMode, type)
-    return bullet
-end
-
+-- 射击子弹
 function Bullet:shoot(dt)
     if self.HP <= 0 then
         self.active = false

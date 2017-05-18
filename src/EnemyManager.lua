@@ -27,7 +27,7 @@ function EnemyManager:updateEnemy(dt)
     if nil == self.enemies or table.maxn(enemy_items) >= 10 then
         return
     end
-    for i, enemy in ipairs(self.enemies) do
+    for i, enemy in pairs(self.enemies) do
         if enemy.showType == "Repeat" then
             -- 每隔showtime时间，第i类敌人刷新一次
             if dt % enemy.showTime == 0 then
@@ -113,7 +113,7 @@ function EnemyManager:actionFollow(sender)
     end
 
     local function repeatFollow(sender)
-        self:actionFollow()
+        self:actionFollow(sender)
     end
 
     local delay = cc.DelayTime:create(1.0)

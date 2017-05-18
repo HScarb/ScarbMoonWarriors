@@ -119,7 +119,7 @@ function Fighter:hurt(damageValue)
     if true == self.canBeAttack then
         self.HP = self.HP - damageValue
         if self.HP <= 0 then
-            self.action = false
+            self.active = false
         end
     end
 end

@@ -45,7 +45,7 @@ end
 function GameLayer:loadingMusic()
     if Global:getInstance():getAudioState() == true then
         cc.SimpleAudioEngine:getInstance():stopMusic()
-        cc.SimpleAudioEngine:getInstance():playMusic("Musci/bgMusic.mp3")
+        cc.SimpleAudioEngine:getInstance():playMusic("Music/bgMusic.mp3", true)
     else
         cc.SimpleAudioEngine:getInstance():stopMusic()
     end
@@ -206,7 +206,7 @@ end
 -- 移除不活跃的元素
 function GameLayer:removeInactiveUnit()
     local children = self:getChildren()
-    for i, unit in ipairs(children) do
+    for i, unit in pairs(children) do
         -- 如果是子弹或者敌人
         local tag = unit:getTag()
         if tag == 901 or tag == 902 or tag == 1002 then
@@ -230,8 +230,11 @@ function GameLayer:checkIsReborn()
     if Global:getInstance():getLifeCount() >= 0 then
         if nil == self.ship then
             self.ship = Fighter:create()
-            self:addChild()
+            self:addChild(self.ship, 0, 1001)
         end
+    else
+	self.gameState = self.GAMESTATE_OVER
+	self:gameOver()
     end
 end
 

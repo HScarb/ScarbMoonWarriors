@@ -12,12 +12,12 @@ function Enemy:create(enemyType)
 end
 
 function Enemy:ctor(enemyType)
-    self.HP = enemyType.HP
-    self.power = enemyType.power
-    self.moveType = enemyType.moveType
-    self.scoreValue = enemyType.scoreValue
-    self.bulletType = enemyType.bulletType
-    self.textureName = enemyType.textureName
+    self.HP = enemyType.HP                      -- 血量
+    self.power = enemyType.power                -- 战力大小
+    self.moveType = enemyType.moveType          -- 移动方式
+    self.scoreValue = enemyType.scoreValue      -- 获得分数
+    self.bulletType = enemyType.bulletType      -- 子弹类型
+    self.textureName = enemyType.textureName    -- 敌人图片资源
 
     self.active = true
     self.speed = 220
@@ -33,7 +33,7 @@ function Enemy:ctor(enemyType)
 
     -- 射击子弹
     local function shoot()
-        self.shoot()
+        self:shoot()
     end
 
     schedule(self, shoot, self.delayTime)
@@ -45,19 +45,21 @@ function Enemy:ctor(enemyType)
 end
 
 function Enemy:shoot()
+--[[
     if nil == self then
         return
     end
+    --]]
+    print("Enemy: ", self)
     if nil == enemy_bullet then
         return
     end
-
     local pos = cc.p(self:getPosition())
     local bullet = Bullet:create(self.bulletSpeed, self.bulletType, 1, ENEMY_BULLET_TYPE)
 
     table.insert(enemy_bullet, bullet)
     self:getParent():addChild(bullet, 5, 902)
-    bullet:setPosition(cc.p(pos.x, pox.y - self.size.height * 0.2))
+    bullet:setPosition(cc.p(pos.x, pos.y - self.size.height * 0.2))
 end
 
 -- 摧毁
