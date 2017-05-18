@@ -82,7 +82,7 @@ function Enemy:destroy()
             table.remove(enemy_items, i)
         end
     end
-    self:removeFromParent()
+    self:runAction(cc.RemoveSelf:create())
 end
 
 -- 受伤

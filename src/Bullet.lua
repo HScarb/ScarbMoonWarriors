@@ -86,6 +86,7 @@ function Bullet:destroy()
     end
 	self:setVisible(false)
 	--self:removeFromParent()
+    self:runAction(cc.RemoveSelf:create())
 end
 
 -- 受伤

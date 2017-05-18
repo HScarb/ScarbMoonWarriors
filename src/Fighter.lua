@@ -111,7 +111,7 @@ function Fighter:destroy()
     Global:getInstance():setLifeCount()
 
     -- 移除
-    self:removeFromParent()
+    self:runAction(cc.RemoveSelf:create())
 end
 
 -- 扣血
