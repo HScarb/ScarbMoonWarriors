@@ -27,6 +27,8 @@ local function main()
     cc.Director:getInstance():setDisplayStats(false)
 
     -- for anysdk
+    require "anysdkConst"
+
     local agent = AgentManager:getInstance()
     --init
     local appKey = "CED525C0-8D41-F514-96D8-90092EB3899A";
@@ -36,7 +38,12 @@ local function main()
     local oauthLoginServer = "http://oauth.anysdk.com/api/OauthLoginDemo/Login.php";
     agent:init(appKey,appSecret,privateKey,oauthLoginServer)
 
-    agent:loadAllPlugins()
+    local targetPlatform = cc.Application:getInstance():getTargetPlatform()
+    if targetPlatform ~= cc.PLATFORM_OS_ANDROID then
+        --load
+        --Android建议在onCreate里调用PluginWrapper.loadAllPlugins();来进行插件初始化
+        agent:loadAllPlugins()
+    end
     -- anysdk end
 
     ORIGIN = cc.Director:getInstance():getVisibleOrigin()
