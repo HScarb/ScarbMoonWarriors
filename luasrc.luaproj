@@ -115,6 +115,7 @@
     <Compile Include="src\EnemyManager.lua" />
     <Compile Include="src\Fighter.lua" />
     <Compile Include="src\GameLayer.lua" />
+    <Compile Include="src\GameOverScene.lua" />
     <Compile Include="src\GameScene.lua" />
     <Compile Include="src\Global.lua" />
     <Compile Include="src\HelloScene.lua" />
@@ -125,6 +126,7 @@
     <Compile Include="src\packages\mvc\AppBase.lua" />
     <Compile Include="src\packages\mvc\init.lua" />
     <Compile Include="src\packages\mvc\ViewBase.lua" />
+    <Compile Include="src\PauseLayer.lua" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

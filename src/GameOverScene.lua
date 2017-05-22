@@ -110,14 +110,17 @@ end
 
 -- 重新游戏
 function GameOverScene:turnToGameScene()
+    print("turnToGameScene")
     local scene = GameScene:create()
-    local trans = cc.TransitionFade:create(1.0, scene)
+    print("Scene", scene)
+    local trans = cc.TransitionFade:create(1.0, scene, cc.c3b(0, 0, 0))
     cc.Director:getInstance():replaceScene(trans)
 end
 
 -- 返回主界面
 function GameOverScene:turnToLoadingScene()
     local scene = LoadingScene:create()
+    print(scene)
     local trans = cc.TransitionFade:create(1.0, scene)
     cc.Director:getInstance():replaceScene(trans)
 end

@@ -4,14 +4,15 @@
 
 GameScene = class("GameScene", function()
     local scene = cc.Scene:createWithPhysics()
-
-    -- 不受重力影响
-    scene:getPhysicsWorld():setGravity(cc.p(0, 0))
+    
     return scene
 end)
 
 function GameScene:create()
     local scene = GameScene.new()
+    -- 不受重力影响
+    scene:getPhysicsWorld():setGravity(cc.p(0, 0))
+
     local gameLayer = require("GameLayer"):create()
 
     scene:addChild(gameLayer)
