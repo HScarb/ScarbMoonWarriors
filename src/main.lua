@@ -26,6 +26,19 @@ local function main()
     cc.Director:getInstance():setAnimationInterval(1.0 / 60)
     cc.Director:getInstance():setDisplayStats(false)
 
+    -- for anysdk
+    local agent = AgentManager:getInstance()
+    --init
+    local appKey = "CED525C0-8D41-F514-96D8-90092EB3899A";
+    local appSecret = "a29b4f22aa63b8274f7f6e2dd5893d9b";
+    local privateKey = "963C4B4DA71BC51C69EB11D24D0C7D49";
+
+    local oauthLoginServer = "http://oauth.anysdk.com/api/OauthLoginDemo/Login.php";
+    agent:init(appKey,appSecret,privateKey,oauthLoginServer)
+
+    agent:loadAllPlugins()
+    -- anysdk end
+
     ORIGIN = cc.Director:getInstance():getVisibleOrigin()
     VISIBLE_SIZE = cc.Director:getInstance():getVisibleSize()
     WIN_SIZE = cc.Director:getInstance():getWinSize()

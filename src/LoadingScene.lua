@@ -157,6 +157,8 @@ end
 
 -- 退出程序
 function LoadingScene:exit()
+    local agent = AgentManager:getInstance()
+    agent:unloadAllPlugins()
     cc.Director:getInstance():endToLua()
 end
 
